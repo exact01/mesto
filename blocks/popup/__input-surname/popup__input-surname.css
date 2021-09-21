@@ -1,0 +1,25 @@
+.popup__input-surname {
+  font-family: Inter;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  width: 358px;
+  min-height: 27px;
+  margin: 0 auto 48px 36px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.20);
+  outline: none;
+  color: #000000;
+}
+
+@media screen and (max-width: 879px) {
+  .popup__input-surname {
+    width: 238px;
+    min-height: 27px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0px auto 45px;
+  }
+}

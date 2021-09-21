@@ -1,0 +1,19 @@
+.card-grid {
+  display: grid;
+  max-width: 880px;
+  min-height: 744px;
+  margin: 47px auto 0;
+  grid-template-columns: repeat(auto-fit, 282px);
+  column-gap: 17px;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .card-grid {
+    justify-content: center;
+    grid-template-columns: 282px;
+    column-gap: 0;
+    row-gap: 20px;
+  }
+}

@@ -1,0 +1,19 @@
+.profile__image-edit-button{
+  object-fit: cover;
+  max-width: 24px;
+  max-height: 24px;
+  cursor: pointer;
+  transition: .5s;
+  transition-timing-function: ease-in-out;
+}
+
+.profile__image-edit-button:hover{
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 767px){
+  .profile__image-edit-button{
+    max-width: 18px;
+    min-height: 18px;
+  }
+}
