@@ -1,7 +1,7 @@
 .logo {
   display: flex;
   max-width: 142px;
-  max-height: 33px;
+  min-height: 33px;
   margin: 0 auto auto 0;
   padding: 0;
   object-fit: cover;
@@ -17,7 +17,7 @@
 @media screen and (max-width: 767px) {
   .logo {
     max-width: 103px;
-    max-height: 24px;
+    minx-height: 24px;
     margin: 28px auto 0 27px;
   }
 }
