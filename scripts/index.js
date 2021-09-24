@@ -1,28 +1,30 @@
-const popup = document.querySelector(".popup");
-const popupEditBtn = document.querySelector(".profile__item-button-edit");
-const popupCloseBtn = popup.querySelector(".popup__close");
+const popup = document.querySelector(".popup"); // Находим наш попапчик в dom дереве ;) 
+const popupEditBtn = document.querySelector(".profile__item-button-edit"); // это кнопочка редактирования профиля в dom дереве
+const popupCloseBtn = popup.querySelector(".popup__close"); // это кнопочка закрытия в dom дереве
 
-let formElement = document.querySelector(".popup__form");
-let nameInput = formElement.querySelector(".popup__input-name");
-let jobInput = formElement.querySelector(".popup__input-surname");
+const formElement = document.querySelector(".popup__form");
+const nameInput = document.getElementById("form-title");
+const jobInput = document.getElementById("form-subtitle");
 
-let youName = document.querySelector(".profile__title");
-let youJob = document.querySelector(".profile__subtitle");
+const youName = document.querySelector(".profile__title");
+const youJob = document.querySelector(".profile__subtitle");
 
-popupEditBtn.addEventListener("click",  openPopup);
+popupEditBtn.addEventListener("click", () => {
+  profileSubmitForm(); 
+  openPopup();
+});
+
 popupCloseBtn.addEventListener("click", closePopup);
 
-
 function openPopup() {
-  profileSubmitForm();
-  document.addEventListener('click', closePopupByClickOrEsc);
-  document.addEventListener('keydown', closePopupByClickOrEsc);
+  // document.addEventListener('click', closePopupByClickOrEsc); не трогать потом пригодится
+  // document.addEventListener('keydown', closePopupByClickOrEsc);
   popup.classList.add("popup_opened");
 }
 
 function closePopup() {
-  document.removeEventListener('click', closePopupByClickOrEsc);
-  document.removeEventListener('keydown', closePopupByClickOrEsc);
+  // document.removeEventListener('click', closePopupByClickOrEsc); не трогать потом пригодится
+  // document.removeEventListener('keydown', closePopupByClickOrEsc);
   popup.classList.remove("popup_opened");
 }
 
@@ -40,8 +42,8 @@ function profileSubmitForm() {
   jobInput.value = youJob.textContent;
 }
 
-function closePopupByClickOrEsc(e){
-  if (e.key === "Escape" || e.target === popup){
-    closePopup();
-  }
-}
+// function closePopupByClickOrEsc(e){
+//   if (e.key === "Escape" || e.target === popup){
+//     closePopup();
+//   }
+// }

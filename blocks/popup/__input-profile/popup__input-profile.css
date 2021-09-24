@@ -1,5 +1,5 @@
-.popup__input-surname {
-  font-family: Inter;
+.popup__input-profile {
+  font-family: "Inter", Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
@@ -12,12 +12,9 @@
   color: #000000;
 }
 
-@media screen and (max-width: 879px) {
-  .popup__input-surname {
+@media screen and (max-width: 1023px) {
+  .popup__input-profile {
     width: 238px;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
     margin: 0px auto 45px;
   }
 }

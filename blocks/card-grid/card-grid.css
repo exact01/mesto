@@ -8,9 +8,16 @@
   justify-content: center;
 }
 
+@media screen and (max-width: 1023px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 282px);
+  }
+}
+
+
+
 @media screen and (max-width: 767px) {
   .card-grid {
-    justify-content: center;
     grid-template-columns: 282px;
     column-gap: 0;
   }

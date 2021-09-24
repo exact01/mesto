@@ -14,10 +14,10 @@
 }
 
 .profile__item-button-add:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 1023px) {
   .profile__item-button-add {
     margin: 36px auto 0;
     width: 282px;

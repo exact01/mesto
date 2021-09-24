@@ -1,6 +1,6 @@
 .popup__title {
   display: flex;
-  font-family: Inter;
+  font-family: "Inter", Arial, sans-serif;
   color: #000000;
   max-width: 330px;
   font-weight: 900;
@@ -10,7 +10,7 @@
   padding: 0;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 1023px) {
   .popup__title {
     font-size: 18px;
     line-height: 22px;

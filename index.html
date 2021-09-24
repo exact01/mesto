@@ -21,10 +21,7 @@
           <div class="profile__info">
             <div class="profile__settings">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button
-                class="profile__item-button-edit"
-                type="button"
-              >
+              <button class="profile__item-button-edit" type="button">
                 <img
                   src="./images/profile__settings.png"
                   alt="Изменить"
@@ -105,9 +102,7 @@
               alt="Вид из окна"
             />
             <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">
-                Карачаевск
-              </h2>
+              <h2 class="card-grid__subtitle">Карачаевск</h2>
               <button type="button" class="card-grid__like"></button>
             </div>
           </div>
@@ -119,23 +114,25 @@
       </footer>
     </div>
 
-    <section class="popup">
+    <div class="popup">
       <div class="popup__container">
         <img
           src="./images/popup__close-icon.svg "
-          alt=""
+          alt="Закрыть"
           class="popup__close"
         />
         <div class="popup__content">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form">
-            <input type="text" name="title" class="popup__input-name" />
-            <input type="text" name="subtitle" class="popup__input-surname" />
-            <button type="submit" name="save" class="popup__form-submit">Сохранить</button>
+          <form class="popup__form" name="popupForm">
+            <input type="text" name="title" class="popup__input-profile" id="form-title" />
+            <input type="text" name="subtitle" class="popup__input-profile" id="form-subtitle" />
+            <button type="submit" name="save" class="popup__form-submit">
+              Сохранить
+            </button>
           </form>
         </div>
       </div>
-    </section>
+    </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
