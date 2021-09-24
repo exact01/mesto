@@ -22,4 +22,4 @@
 
 **Ссылка на работу**
 
-* [Ссылка на раоботу](https://thechertan.github.io/mesto/index.html)
+* [Ссылка на раоботу](https://thechertan.github.io/mesto/)
