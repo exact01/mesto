@@ -8,6 +8,8 @@
   cursor: pointer;
   transition: .5s;
   transition-timing-function: ease-in-out;
+  margin: 0;
+  padding: 0;
 }
 
 .popup__close:hover{
@@ -19,6 +21,6 @@
     width: 20px;
     min-height: 20px;
     top: -36px;
-    right: -36px;
+    right: 0px;
   }
 }

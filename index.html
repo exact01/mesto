@@ -39,74 +39,7 @@
             />
           </button>
         </section>
-        <section class="card-grid">
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск там где хорошо</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск город мечты</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-          <div class="card-grid__item">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              class="card-grid__image"
-              alt="Вид из окна"
-            />
-            <div class="card-grid__block">
-              <h2 class="card-grid__subtitle">Карачаевск</h2>
-              <button type="button" class="card-grid__like"></button>
-            </div>
-          </div>
-        </section>
+        <section class="card-grid"></section>
       </main>
 
       <footer class="footer">
@@ -114,7 +47,7 @@
       </footer>
     </div>
 
-    <div class="popup">
+    <div class="popup popup_type_edit">
       <div class="popup__container">
         <button class="popup__button-close" name="close" type="button">
           <img
@@ -125,7 +58,7 @@
         </button>
         <div class="popup__content">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="popupForm">
+          <form class="popup__form popup__form_edit" name="popupForm">
             <input
               type="text"
               name="title"
@@ -145,6 +78,69 @@
         </div>
       </div>
     </div>
-    <script src="./scripts/index.js"></script>
+
+    <div class="popup popup_type_add-card">
+      <div class="popup__container">
+        <button class="popup__button-close" name="close" type="button">
+          <img
+            src="./images/popup__close-icon.svg "
+            alt="Закрыть"
+            class="popup__close"
+          />
+        </button>
+        <div class="popup__content">
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form popup__form_add-card" name="popupForm">
+            <input
+              type="text"
+              name="title"
+              class="popup__input-profile"
+              id="form-link"
+              placeholder="Название"
+            />
+            <input
+              type="text"
+              name="subtitle"
+              class="popup__input-profile"
+              id="form-name"
+              placeholder="Ссылка на картинку"
+            />
+            <button type="submit" name="save" class="popup__form-submit">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup popup_type_image">
+      <div class="popup__container popup__container_image">
+        <button class="popup__button-close" name="close" type="button">
+          <img
+            src="./images/popup__close-icon.svg "
+            alt="Закрыть"
+            class="popup__close"
+          />
+        </button>
+        <div class="popup__content">
+          <img src="" alt="Картинка" class="popup__image-full" />
+          <p class="popup__text"></p>
+        </div>
+      </div>
+    </div>
+
+    <template id="card-grid-template">
+      <div class="card-grid__item">
+        <img src="" class="card-grid__image" alt="Картинка" />
+        <button type="button" class="card-grid__button-remove-card"></button>
+        <div class="card-grid__block">
+          <h2 class="card-grid__subtitle"></h2>
+          <button type="button" class="card-grid__like"></button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/cards.js" type="module"></script>
   </body>
 </html>
