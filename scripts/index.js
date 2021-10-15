@@ -9,7 +9,7 @@ const popupAddCard = document.querySelector(".profile__item-button-add");
 const popupCloseBtnOne = popupTypeEdit.querySelector(".popup__close_one");
 const popupCloseBtnTwo = popupTypeAddcard.querySelector(".popup__close_two");
 const popupCloseBtnThree = popupTypeImage.querySelector(".popup__close_three");
-const formElementEdit = document.querySelector(".popup__form_edit"); // for button edit
+const formElementEdit = document.querySelector(".popup__form_type_edit"); // for button edit
 const formElementAddCard = document.querySelector(".popup__form_add-card"); // for button eddit card
 const nameInput = document.getElementById("form-title"); //  for profile
 const jobInput = document.getElementById("form-subtitle"); // for profile
@@ -18,6 +18,13 @@ const inputName = document.getElementById("form-name"); //for card
 const youName = document.querySelector(".profile__title");
 const youJob = document.querySelector(".profile__subtitle");
 const cardContainer = document.querySelector(".card-grid");
+const popupAllList = document.querySelectorAll('.popup'); //for all popup
+
+popupAllList.forEach(closepopup => closepopup.addEventListener('mousedown', closePopupByClickOnOverlay));
+/* 
+const submitButton = document.querySelector('.popup__form-submit');
+submitButton.classList.add('popup__submit-button_disabled');
+submitButton.setAttribute('disabled', true); */
 
 formElementEdit.addEventListener("submit", formSubmitHandler); // for popupTypeEdit
 formElementAddCard.addEventListener("submit", formSubmitAddCard);
@@ -45,10 +52,12 @@ popupCloseBtnThree.addEventListener("click", () => {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closePopupByClickOnEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closePopupByClickOnEsc);
 }
 
 function formSubmitAddCard(evt) {
@@ -108,7 +117,7 @@ function createCard(name, link) {
   return cardElement; // back arr in a createCard
 }
 
-function addCard(name, link, appOrPre = "append") {
+function addCard(name, link, appOrPre = "append", e) {
   switch (appOrPre) {
     case "append":
       cardContainer.append(createCard(name, link));
@@ -117,4 +126,17 @@ function addCard(name, link, appOrPre = "append") {
       cardContainer.prepend(createCard(name, link));
       break;
   }
+}
+
+function closePopupByClickOnOverlay(e) { //close popup mousedown
+	if (e.target.classList.contains('popup_opened')) {
+		closePopup(e.target);
+	} 
+};
+
+function closePopupByClickOnEsc(e) {
+	if(e.key === "Escape"){
+		const activPopup = document.querySelector('.popup_opened');
+		closePopup(activPopup);
+	}
 }
