@@ -1,4 +1,7 @@
+import { FormValidator as Validator, config as cfg } from "./FormValidator.js";
 import initialCards from "./cards.js";
+import { Card } from './Card.js';
+
 const popupTypeEdit = document.querySelector(".popup_type_edit"); // select popup where type edit;
 const popupTypeAddcard = document.querySelector(".popup_type_add-card"); // select popup where type add-card
 const popupTypeImage = document.querySelector(".popup_type_image");
@@ -17,10 +20,11 @@ const inputLink = document.getElementById("form-link"); // for card
 const inputName = document.getElementById("form-name"); //for card
 const youName = document.querySelector(".profile__title");
 const youJob = document.querySelector(".profile__subtitle");
-const cardContainer = document.querySelector(".card-grid");
-const popupAllList = document.querySelectorAll('.popup'); //for all popup
+const popupAllList = document.querySelectorAll(".popup"); //for all popup
 
-popupAllList.forEach(closepopup => closepopup.addEventListener('mousedown', closePopupByClickOnOverlay));
+popupAllList.forEach((closepopup) =>
+  closepopup.addEventListener("mousedown", closePopupByClickOnOverlay)
+);
 /* 
 const submitButton = document.querySelector('.popup__form-submit');
 submitButton.classList.add('popup__submit-button_disabled');
@@ -52,19 +56,19 @@ popupCloseBtnThree.addEventListener("click", () => {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', closePopupByClickOnEsc);
+  document.addEventListener("keydown", closePopupByClickOnEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closePopupByClickOnEsc);
+  document.removeEventListener("keydown", closePopupByClickOnEsc);
 }
 
 function formSubmitAddCard(evt) {
   evt.preventDefault();
   const name = inputName.value;
   const link = inputLink.value;
-  addCard(link, name, "prepend");
+  addCardSubmit(createCard({ name, link }));
   closePopup(popupTypeAddcard);
   inputName.value = "";
   inputLink.value = "";
@@ -82,61 +86,40 @@ function profileSubmitForm() {
   jobInput.value = youJob.textContent;
 }
 
-initialCards.forEach((element) => {
-  addCard(element.name, element.link, "append");
+// добавления карточки, тяжело дается ООП(
+const inputCard = document.querySelector(".card-grid"); // находим секцию куда необходимо добавить карточку
+initialCards.forEach((element) => { // перебираем массив с данными для карточек
+  const cardElement = createCard(element); // создаем карту
+  inputCard.prepend(cardElement); // добавляем карту на страницу
 });
 
-function createCard(name, link) {
-  const cardTemplate = document.querySelector("#card-grid-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".card-grid__item")
-    .cloneNode(true);
-
-  const cardDelete = cardElement.querySelector(
-    ".card-grid__button-remove-card"
-  );
-  cardDelete.addEventListener("click", function () {
-    cardElement.remove();
-  });
-  const popupOpenImage = cardElement.querySelector(".card-grid__image");
-
-  popupOpenImage.addEventListener("click", function () {
-    popupSrcImage.src = link;
-    popupSrcImage.alt = name;
-    popupTextImage.textContent = name;
-    openPopup(popupTypeImage);
-  });
-
-  const like = cardElement.querySelector(".card-grid__like");
-  like.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("card-grid__like_activate");
-  });
-  popupOpenImage.src = link;
-  popupOpenImage.alt = name;
-  cardElement.querySelector(".card-grid__subtitle").textContent = name;
-  return cardElement; // back arr in a createCard
+function createCard(element) { 
+  // Создадим экземпляр карточки
+  const cardNew = new Card(element, "#card-grid-template"); // создаем данные
+  // Создаём карточку и возвращаем наружу
+  return cardNew.generateCard();
 }
 
-function addCard(name, link, appOrPre = "append", e) {
-  switch (appOrPre) {
-    case "append":
-      cardContainer.append(createCard(name, link));
-      break;
-    case "prepend":
-      cardContainer.prepend(createCard(name, link));
-      break;
+function addCardSubmit(date){ // для добавления карты через сабмит
+  inputCard.prepend(date); // добавляем карту на страницу
+}
+
+function closePopupByClickOnOverlay(e) {
+  //close popup mousedown
+  if (e.target.classList.contains("popup_opened")) {
+    closePopup(e.target);
   }
 }
 
-function closePopupByClickOnOverlay(e) { //close popup mousedown
-	if (e.target.classList.contains('popup_opened')) {
-		closePopup(e.target);
-	} 
-};
-
-function closePopupByClickOnEsc(e) {
-	if(e.key === "Escape"){
-		const activPopup = document.querySelector('.popup_opened');
-		closePopup(activPopup);
-	}
+export function closePopupByClickOnEsc(e) {
+  if (e.key === "Escape") {
+    const activPopup = document.querySelector(".popup_opened");
+    closePopup(activPopup);
+  }
 }
+
+//on validation
+const validatorEdit = new Validator(cfg, formElementEdit);
+validatorEdit.enableValidation();
+const validatorAddCard = new Validator(cfg, formElementAddCard);
+validatorAddCard.enableValidation();
