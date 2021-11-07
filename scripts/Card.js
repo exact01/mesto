@@ -1,18 +1,18 @@
 //import initialCards from "./cards.js";
 import { closePopupByClickOnEsc as closeFromEsc } from "./index.js";
 
-// необходиммы переменные для работы класса
+// необходиммы переменные для работы класса Card
 const fullImage = document.querySelector(".popup_type_image");
 const fullCardImage = document.querySelector(".popup__image-full");
 const fullCardName = document.querySelector(".popup__text");
-const closeButton = document.querySelector(".popup__close_three");
+const closeButton = document.querySelector(".popup__close_type_image");
 // 
 
 export class Card {
-  constructor(date, cardSelector) {
+  constructor(data, cardSelector) {
     this._cardSelector = cardSelector;
-    this._name = date.name;
-    this._src = date.link;
+    this._name = data.name;
+    this._src = data.link;
   }
 
   _getTemplate() {
@@ -29,6 +29,7 @@ export class Card {
   _handleOpenPopup() {
     // внутрений метод для вызова карточки
     fullCardImage.src = this._src;
+    fullCardImage.alt = this._name;
     fullCardName.textContent = this._name;
     fullImage.classList.add("popup_opened");
     document.addEventListener("keydown", closeFromEsc);
@@ -56,7 +57,7 @@ export class Card {
         this._handleOpenPopup();
       });
 
-      closeButton.addEventListener("click", () => {
+    closeButton.addEventListener("click", () => {
       this._handleClosePopup();
     });
 

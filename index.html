@@ -53,7 +53,7 @@
           <img
             src="./images/popup__close-icon.svg "
             alt="Закрыть"
-            class="popup__close popup__close_one"
+            class="popup__close popup__close_type_edit"
           />
         </button>
         <div class="popup__content">
@@ -105,7 +105,7 @@
           <img
             src="./images/popup__close-icon.svg "
             alt="Закрыть"
-            class="popup__close popup__close_two"
+            class="popup__close popup__close_type_add-card"
           />
         </button>
         <div class="popup__content">
@@ -116,22 +116,23 @@
                 type="text"
                 name="title"
                 class="popup__input-profile"
-                id="form-link"
+                id="form-name"
                 placeholder="Название"
                 minlength="2"
                 maxlength="30"
                 required
               />
-              <span class="form-link-error popup__error popup__span-fix"></span>
+              <span class="form-name-error popup__error popup__span-fix"></span>
               <input
-                type="text"
+                type="url"
                 name="subtitle"
                 class="popup__input-profile"
-                id="form-name"
+                id="form-link"
                 placeholder="Ссылка на картинку"
+                
                 required
               />
-              <span class="form-name-error popup__error popup__span-fix"></span>
+              <span class="form-link-error popup__error popup__span-fix"></span>
               <button type="submit" name="save" class="popup__form-submit">
                 Сохранить
               </button>
@@ -147,7 +148,7 @@
           <img
             src="./images/popup__close-icon.svg "
             alt="Закрыть"
-            class="popup__close popup__close_three"
+            class="popup__close popup__close_type_image"
           />
         </button>
         <div class="popup__content">
