@@ -25,7 +25,7 @@ popupAllList.forEach((popupClose) =>
   popupClose.addEventListener("mousedown", closePopupByClickOnOverlay)
 );
 formElementEdit.addEventListener("submit", submitFormProfileHandler); // for popupTypeEdit
-formElementAddCard.addEventListener("submit",  submitFormAddCard);
+formElementAddCard.addEventListener("submit", submitFormAddCard);
 
 popupEditBtn.addEventListener("click", () => {
   profileSubmitForm();
@@ -116,9 +116,9 @@ export function closePopupByClickOnEsc(e) {
 }
 
 function resetCardForm(formElement) {
-	const submitButton = formElement.querySelector('.popup__form-submit');
-	submitButton.classList.add('popup__submit-button_inactive');
-	submitButton.setAttribute('disabled', true);
+  const submitButton = formElement.querySelector('.popup__form-submit');
+  submitButton.classList.add('popup__submit-button_inactive');
+  submitButton.setAttribute('disabled', true);
 }
 
 
