@@ -5,7 +5,7 @@ import { closePopupByClickOnEsc as closeFromEsc } from "./index.js";
 const fullImage = document.querySelector(".popup_type_image");
 const fullCardImage = document.querySelector(".popup__image-full");
 const fullCardName = document.querySelector(".popup__text");
-const closeButton = document.querySelector(".popup__close_type_image");
+
 // 
 
 export class Card {
@@ -57,9 +57,7 @@ export class Card {
         this._handleOpenPopup();
       });
 
-    closeButton.addEventListener("click", () => {
-      this._handleClosePopup();
-    });
+
 
     this._element
       .querySelector(".card-grid__like")

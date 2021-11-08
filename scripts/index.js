@@ -27,7 +27,7 @@ formElementEdit.addEventListener("submit", submitFormProfileHandler); // for pop
 formElementAddCard.addEventListener("submit", submitFormAddCard);
 
 popupEditBtn.addEventListener("click", () => {
-  profileSubmitForm();
+  setProfileForm();
   openPopup(popupTypeEdit);
 });
 
@@ -43,7 +43,7 @@ popupAddCloseBtn.addEventListener("click", () => {
   closePopup(popupTypeAddCard);
 });
 
-popupImageCloseBtn.addEventListener("click", () => {
+popupImageCloseBtn.addEventListener("click", () => { // перенес из Card. 
   closePopup(popupTypeImage);
 });
 
@@ -63,20 +63,18 @@ function submitFormAddCard(evt) {
   const link = inputLink.value;
   renderCard(createCard({ name, link }));
   closePopup(popupTypeAddCard);
-  inputName.value = "";
-  inputLink.value = "";
-  resetCardForm(popupTypeAddCard);
+  resetForm(popupTypeAddCard);
 }
 
 function submitFormProfileHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
-  resetCardForm(popupTypeEdit);
+  resetForm(popupTypeEdit);
   closePopup(popupTypeEdit);
 }
 
-function profileSubmitForm() {
+function setProfileForm() {
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
 }
@@ -113,7 +111,7 @@ export function closePopupByClickOnEsc(e) {
   }
 }
 
-function resetCardForm(formElement) {
+function resetForm(formElement) {
   formElement.querySelector(".popup__form").reset();
   const submitButton = formElement.querySelector(".popup__form-submit");
   submitButton.classList.add("popup__submit-button_inactive");
