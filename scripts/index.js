@@ -1,6 +1,6 @@
 import { FormValidator as Validator, config as cfg } from "./FormValidator.js";
 import initialCards from "./cards.js";
-import { Card } from './Card.js';
+import { Card } from "./Card.js";
 
 const popupTypeEdit = document.querySelector(".popup_type_edit"); // select popup where type edit;
 const popupTypeAddCard = document.querySelector(".popup_type_add-card"); // select popup where type add-card
@@ -19,7 +19,6 @@ const inputName = document.getElementById("form-name"); //for card
 const userName = document.querySelector(".profile__title");
 const userJob = document.querySelector(".profile__subtitle");
 const popupAllList = document.querySelectorAll(".popup"); //for all popup
-const submitButton = document.querySelector('.popup__form-submit');
 
 popupAllList.forEach((popupClose) =>
   popupClose.addEventListener("mousedown", closePopupByClickOnOverlay)
@@ -53,10 +52,9 @@ function openPopup(popup) {
   document.addEventListener("keydown", closePopupByClickOnEsc);
 }
 
-function closePopup(popup, e) {
+function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupByClickOnEsc);
-
 }
 
 function submitFormAddCard(evt) {
@@ -74,8 +72,8 @@ function submitFormProfileHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
-  closePopup(popupTypeEdit);
   resetCardForm(popupTypeEdit);
+  closePopup(popupTypeEdit);
 }
 
 function profileSubmitForm() {
@@ -116,9 +114,10 @@ export function closePopupByClickOnEsc(e) {
 }
 
 function resetCardForm(formElement) {
-  const submitButton = formElement.querySelector('.popup__form-submit');
-  submitButton.classList.add('popup__submit-button_inactive');
-  submitButton.setAttribute('disabled', true);
+  formElement.querySelector(".popup__form").reset();
+  const submitButton = formElement.querySelector(".popup__form-submit");
+  submitButton.classList.add("popup__submit-button_inactive");
+  submitButton.setAttribute("disabled", true);
 }
 
 
