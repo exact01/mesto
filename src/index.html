@@ -8,7 +8,11 @@
   <body>
     <div class="page">
       <header class="header">
-        <img src="<%=require('./images/__logo.svg')%>" alt="Место" class="logo" />
+        <img
+          src="<%=require('./images/__logo.svg')%>"
+          alt="Место"
+          class="logo"
+        />
       </header>
       <main>
         <section class="profile">
@@ -73,9 +77,11 @@
                 placeholder="Имя"
                 required
               />
-              <span
-                class="form-title-error popup__error popup__span-fix"
-              ></span>
+              <div class="popup__span-error"><!-- костыльный фикс -->
+                <span class="form-title-error popup__error popup__span-fix">
+                </span>
+              </div>
+
               <input
                 type="text"
                 name="profession"
@@ -86,9 +92,11 @@
                 placeholder="О себе"
                 required
               />
+              <div class="popup__span-error"><!-- костыльный фикс -->
               <span
                 class="form-subtitle-error popup__error popup__span-fix"
               ></span>
+              </div>
               <button type="submit" name="save" class="popup__form-submit">
                 Сохранить
               </button>
@@ -121,17 +129,20 @@
                 maxlength="30"
                 required
               />
+              <div class="popup__span-error"><!-- костыльный фикс -->
               <span class="form-name-error popup__error popup__span-fix"></span>
+            </div>
               <input
                 type="url"
                 name="link"
                 class="popup__input-profile popup__input-profile_link"
                 id="form-link"
                 placeholder="Ссылка на картинку"
-                
                 required
               />
+              <div class="popup__span-error"><!-- костыльный фикс -->
               <span class="form-link-error popup__error popup__span-fix"></span>
+             </div>
               <button type="submit" name="save" class="popup__form-submit">
                 Сохранить
               </button>

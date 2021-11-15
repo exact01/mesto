@@ -10,11 +10,13 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   color: #000000;
+  margin-bottom: 36px;
 }
 
 @media screen and (max-width: 1023px) {
   .popup__input-profile {
     width: 238px;
     margin: 0 auto;
+    margin-bottom: 45px;
   }
 }

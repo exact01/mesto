@@ -67,6 +67,7 @@ export const fullCardImage = document.querySelector(".popup__image-full");
 //all popup
 
 export const popupList = document.querySelectorAll(".popup"); 
+export const KEYESC = "Escape";
 
 //add in html section
 export const cardsContainer = document.querySelector(".card-grid");
