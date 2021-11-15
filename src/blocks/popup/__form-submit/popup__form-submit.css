@@ -1,0 +1,33 @@
+.popup__form-submit {
+  font-family: "Inter", Arial, sans-serif;
+  text-align: center;
+  outline: none;
+  border: 0;
+  width: 356px;
+  align-items: center;
+  background: #000000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 auto 36px;
+  cursor: pointer;
+  transition: 0.5s;
+  transition-timing-function: ease-in-out;
+  padding: 14px 0 18px;
+}
+
+.popup__form-submit:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 1023px) {
+  .popup__form-submit {
+    width: 238px;
+    padding: 14px 0 14px;
+    margin: 0 auto 25px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
