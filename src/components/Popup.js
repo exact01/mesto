@@ -2,7 +2,6 @@ import { KEYESC } from '../utils/constants.js'; // неуверен что та�
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = document.querySelector(popupSelector);
-        console.log(this._popupSelector)
         this._closeButton = this._popupSelector.querySelector(".popup__close");
         this.close = this.close.bind(this);
         this._handleEscClose = this._handleEscClose.bind(this);
