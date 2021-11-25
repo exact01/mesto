@@ -1,6 +1,5 @@
 import "./index.css";
 import {
-  initialCards,
   cardsContainer,
   addProfileCardButton,
   addProfileEditButton,
@@ -15,36 +14,69 @@ import {
   formEditPopup,
   formAddCard,
   cardGrid,
+  avatarSelector,
+  configVersionOneApi as cfgApi,
+  popupConfirmSelector,
+  popupAvatarSelector,
+  formAvatarPopupSelector,
+  layerAvatarSelector,
+} from "../utils/constants.js";
 
-} from '../utils/constants.js';
+import Section from "../components/Section.js";
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/popupWithConfirm.js";
 
-import Section from '../components/Section.js';
-import Card from '../components/Card.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
-import FormValidator from '../components/FormValidator.js';
+const api = new Api(cfgApi);
 
-const popupWithImage = new PopupWithImage(showImage);
+// попап подверждения для удаления.
+const popupWithConfirm = new PopupWithConfirm(popupConfirmSelector);
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item));
   }
 }, cardsContainer
 );
+let user;
+function createCard(item) {
+  const newCard = new Card(
+    item,
+    cardGrid,
+    () => popupWithImage.open(item.name, item.link),
+    {
+      handleDeleteCard: function (id, card) {
+        popupWithConfirm.open({
+          deleteCard: function () {
+            api.deleteCard(id)
+              .then(() => {card.remove()})
+              .catch((err) => {console.log(err);})
+            popupWithConfirm.close();
+          }
+        });
+      },
+      handleLikeCard: function (card, condition) {
+        if (condition === "isLiked") {
+          return api.deleteLike(card._id)
+        } else {
+          return api.addLike(card._id)
+        }
+      }
+    },
+    user
+  );
 
-function createCard(element) {
-  // Создадим экземпляр карточки
-  const newCard = new Card(element, cardGrid, () => popupWithImage.open(element.name, element.link)); // создаем данные
-  // Создаём карточку и возвращаем наружу
   return newCard.generateCard();
 }
 
-cardList.render();
+// попап картинки
+const popupWithImage = new PopupWithImage(showImage);
 
-addProfileCardButton.addEventListener('click', handleAddCard);
+addProfileCardButton.addEventListener("click", handleAddCard);
 
 
 function handleAddCard() {
@@ -53,14 +85,27 @@ function handleAddCard() {
 }
 
 const addCardPopup = new PopupWithForm(popupAddCard, {
-  handleFormSubmit: (formData) => {
-    cardsContainer.prepend(createCard(formData));
-    addCardPopup.close();
+  handleFormSubmit: (data) => {
+    renderLoading(true, formAddCard)
+    api.getNewCard({
+      name: data.name,
+      link: data.link
+    })
+      .then((data) => {
+        cardsContainer.prepend(createCard(data));
+        addCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        renderLoading(false, formAddCard);
+      })
   }
 }
 );
 
-addProfileEditButton.addEventListener('click', handleEditPopup);
+addProfileEditButton.addEventListener("click", handleEditPopup);
 
 function handleEditPopup() {
   popupEdit.open();
@@ -72,20 +117,71 @@ function handleEditPopup() {
 
 const userInfo = new UserInfo({
   nameSelector: profileName,
-  nameJob: profileJob
+  nameJob: profileJob,
+  avatarSelector: avatarSelector
 });
 
 const popupEdit = new PopupWithForm(popupTypeEdit, {
-  handleFormSubmit: (formData) => {
-    userInfo.setUserInfo({
-      name: formData.username,
-      description: formData.profession
-    });
+  handleFormSubmit: (data) => {
 
-    popupEdit.close();
+    renderLoading(true, formEditPopup)
+    api.setUserProfile({
+      name: data.username,
+      description: data.profession
+    })
+      .then((data) => {
+        userInfo.setUserInfo({
+          name: data.name,
+          description: data.about
+        });
+        popupEdit.close();
+      })
+      .catch((err) => {console.log(err);})
+      .finally(() => {renderLoading(false, formEditPopup);})
+  }
+});
+
+const popupAvatar = new PopupWithForm(popupAvatarSelector, {
+  handleFormSubmit: (avatarLink) => {
+    console.log(avatarLink);
+    renderLoading(true, formAvatarPopupSelector)
+    api.updateAvatar(avatarLink.link)
+      .then(() => {
+        userInfo.setUserAvatar({
+          avatar: avatarLink.link
+        })
+        popupAvatar.close();
+      })
+      .catch((err) => {console.log(err);})
+      .finally(() => {renderLoading(false, formAvatarPopupSelector);})
   }
 })
 
+const handlerPopupAvatar = document.querySelector(layerAvatarSelector);
+handlerPopupAvatar.addEventListener("click", openPopupAvatar);
+
+function openPopupAvatar() {
+  popupAvatar.open();
+  validatorAvatarPopup.cleanValidationErrors();
+}
+
+function renderLoading(loading, formSelector) {
+  const currentForm = document.querySelector(formSelector)
+  const currentTextButton = currentForm.querySelector(".popup__form-submit");
+
+  if (loading) {
+    currentTextButton.textContent = "Сохранение...";
+    currentTextButton.setAttribute("disabled", true);
+    currentTextButton.style.backgroundColor = "#787373"
+  } else {
+    currentTextButton.textContent = "Сохранить";
+    currentTextButton.removeAttribute("disabled", true);
+    currentTextButton.style.backgroundColor = "#000"
+  }
+}
+
+popupAvatar.setEventListeners();
+popupWithConfirm.setEventListeners();
 popupWithImage.setEventListeners();
 addCardPopup.setEventListeners();
 popupEdit.setEventListeners();
@@ -95,3 +191,25 @@ const validatorEdit = new FormValidator(cfg, formEditPopup);
 validatorEdit.enableValidation();
 const validatorAddCard = new FormValidator(cfg, formAddCard);
 validatorAddCard.enableValidation();
+const validatorAvatarPopup = new FormValidator(cfg, formAvatarPopupSelector);
+validatorAvatarPopup.enableValidation();
+
+
+Promise.all([
+  api.getUserProfile(),
+  api.getInitialCards()
+])
+  .then(([data, cards]) => {
+    user = data;
+    userInfo.setUserInfo({
+      name: data.name,
+      description: data.about,
+    })
+    userInfo.setUserAvatar({
+      avatar: data.avatar
+    })
+    cardList.render(cards);
+  })
+  .catch((err) => {
+    console.log(err);
+  })

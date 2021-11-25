@@ -18,7 +18,7 @@ export default class PopupWithForm extends Popup {
         return this._formValue;
     }
 
-    setEventListeners(){
+    setEventListeners() {
         super.setEventListeners();
         this._popupForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -26,7 +26,7 @@ export default class PopupWithForm extends Popup {
         });
     }
 
-    close(){
+    close() {
         super.close();
         this._submitButton.classList.add("popup__submit-button_inactive");
         this._submitButton.setAttribute("disabled", true);

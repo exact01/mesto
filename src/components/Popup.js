@@ -1,4 +1,4 @@
-import { KEYESC } from '../utils/constants.js'; // неуверен что так правильно, а по поводу валидации, если позиционировать их абсолютно, то мы не контролируем количество строк, если строк бдует больше 2ух, то что дальше, а я скажу что дальше, дальше строка влезет на инпут это тоже в корне не верно, но я сделаю так как вам удобно, можно прибегнуть в lenght в js(длина строки), но опять же такого не было в ТЗ. Это решение верное только в том случае, когда текст вы пишите сами для валидации. Возможно вы во всем правы, с теми знаниями по фронту которые есть у меня сейчас я вижу это так.
+import { KEYESC } from "../utils/constants.js";
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = document.querySelector(popupSelector);
@@ -25,7 +25,7 @@ export default class Popup {
     }
 
     _handleOverlayClose(e) {
-        if (e.target.classList.contains('popup_opened')) {
+        if (e.target.classList.contains("popup_opened")) {
             this.close();
         }
     }

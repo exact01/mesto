@@ -9,7 +9,9 @@ export default class FormValidator {
   }
 
   _showInputError = (inputElement) => { // show classError input local method
+    console.log(inputElement.id);
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    console.log(errorElement);
     inputElement.classList.add(this._config.classInputError);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._config.classError);
@@ -52,7 +54,7 @@ export default class FormValidator {
     this._inputForm.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this._toggleButtonState(inputElement);
       });
     });
   }
@@ -63,7 +65,7 @@ export default class FormValidator {
 
   cleanValidationErrors() {
     this._spanErrors.forEach(element => {
-      element.textContent = '';
+      element.textContent = "";
     });
 
     this._popupSetErrors.forEach(element => {

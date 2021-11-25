@@ -1,0 +1,19 @@
+.profile__layer {
+  position: absolute;
+  width: 122px;
+  height: 122px;
+  top: -1px;
+  left: -1px;
+  border-radius: 50%;
+  background-color: #000;
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.profile__layout:hover {
+  opacity: 0.8;
+}

@@ -21,6 +21,8 @@
 @import url(../blocks/profile/__image-add-button/profile__image-add-button.css);
 @import url(../blocks/profile/__item-button-edit/profile__item-button-edit.css);
 @import url(../blocks/profile/__item-button-add/profile__item-button-add.css);
+@import url(../blocks/profile/__layer/profile__layer.css);
+@import url(../blocks/profile/profile__avatar-container/profile__avatar-container.css);
 
 /* block card-grid */
 @import url(../blocks/card-grid/card-grid.css);
@@ -31,6 +33,8 @@
 @import url(../blocks/card-grid/__like/card-grid__like.css);
 @import url(../blocks/card-grid/__like/_activate/card-grid__like_activate.css);
 @import url(../blocks/card-grid/button-remove-card/card-grid__button-remove-card.css);
+@import url(../blocks/card-grid/__like-counter/card-grid__like-counter.css);
+@import url(../blocks/card-grid/__like-item/card-grid__like-item.css);
 
 /* block footer */
 @import url(../blocks/footer/footer.css);
@@ -57,3 +61,5 @@
 @import url(../blocks/popup/__field-error-innactive/popup__field-error-inactive.css);
 @import url(../blocks/popup/__span-fix/popup__span-fix.css);
 @import url(../blocks/popup/__span-error/popup__span-error.css);
+@import url(../blocks/popup/__form-submit/_fix/popup__form-submit_fix.css);
+@import url(../blocks/popup/__title/_confirm/popup_type_confirm.css);
