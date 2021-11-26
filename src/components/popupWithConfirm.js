@@ -1,17 +1,9 @@
-import { KEYESC } from "../utils/constants.js";
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirm extends Popup {
   constructor(popupSelector) {
     super(popupSelector)
     this._confirmButton = this._popupSelector.querySelector(".popup__form-submit_fix");
-  }
-
-  _handleEscClose(evt) {
-    super._handleEscClose(evt);
-    if (evt.key === KEYESC) {
-      this.close();
-    }
   }
 
   open({ deleteCard }) {

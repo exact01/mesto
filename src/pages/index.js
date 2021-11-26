@@ -53,17 +53,32 @@ function createCard(item) {
         popupWithConfirm.open({
           deleteCard: function () {
             api.deleteCard(id)
-              .then(() => {card.remove()})
-              .catch((err) => {console.log(err);})
-            popupWithConfirm.close();
+              .then(() => {
+                newCard.remove(card),
+                  popupWithConfirm.close();
+              })
+              .catch((err) => { console.log(err); })
           }
         });
       },
       handleLikeCard: function (card, condition) {
         if (condition === "isLiked") {
-          return api.deleteLike(card._id)
-        } else {
-          return api.addLike(card._id)
+          api.deleteLike(card._id)
+            .then((cardData) => {
+              newCard.setLikesInfo(cardData)
+            })
+            .catch((err) => {
+              console.log(`Ошибка снятия лайка: ${err}`);
+            })
+        }
+        else {
+          api.addLike(card._id)
+            .then((cardData) => {
+              newCard.setLikesInfo(cardData);
+            })
+            .catch((err) => {
+              console.log(`Ошибка добавления лайка: ${err}`);
+            })
         }
       }
     },
@@ -82,6 +97,7 @@ addProfileCardButton.addEventListener("click", handleAddCard);
 function handleAddCard() {
   addCardPopup.open();
   validatorAddCard.cleanValidationErrors();
+  // по поводу этого замечания, ошибка была на строке 182, ошибка исправлена ;), можете проверить, теперь все десейблится.
 }
 
 const addCardPopup = new PopupWithForm(popupAddCard, {
@@ -136,8 +152,8 @@ const popupEdit = new PopupWithForm(popupTypeEdit, {
         });
         popupEdit.close();
       })
-      .catch((err) => {console.log(err);})
-      .finally(() => {renderLoading(false, formEditPopup);})
+      .catch((err) => { console.log(err); })
+      .finally(() => { renderLoading(false, formEditPopup); })
   }
 });
 
@@ -152,8 +168,8 @@ const popupAvatar = new PopupWithForm(popupAvatarSelector, {
         })
         popupAvatar.close();
       })
-      .catch((err) => {console.log(err);})
-      .finally(() => {renderLoading(false, formAvatarPopupSelector);})
+      .catch((err) => { console.log(err); })
+      .finally(() => { renderLoading(false, formAvatarPopupSelector); })
   }
 })
 
@@ -172,11 +188,10 @@ function renderLoading(loading, formSelector) {
   if (loading) {
     currentTextButton.textContent = "Сохранение...";
     currentTextButton.setAttribute("disabled", true);
-    currentTextButton.style.backgroundColor = "#787373"
+    currentTextButton.style.backgroundColor = "#787373";
   } else {
     currentTextButton.textContent = "Сохранить";
-    currentTextButton.removeAttribute("disabled", true);
-    currentTextButton.style.backgroundColor = "#000"
+    currentTextButton.removeAttribute("style");
   }
 }
 

@@ -23,7 +23,9 @@ export default class Card {
     return cardElement;
   }
 
-  _setLikesInfo(data) {
+
+
+  setLikesInfo(data) { // постановка лайка
     this._likeCounter = this._element.querySelector(likeCounterSelector);
     this._likeCounter.textContent = data.likes.length;
     this._likeElement = this._element.querySelector(likeSelector);
@@ -61,20 +63,8 @@ export default class Card {
     this._likeElement.addEventListener("click", () => {
       if (this._likeElement.classList.contains(likeActiveClass)) {
         this._handleLikeCard(this._data, "isLiked")
-          .then((cardData) => {
-            this._setLikesInfo(cardData)
-          })
-          .catch((err) => {
-            console.log(`Ошибка снятия лайка: ${err}`);
-          })
       } else {
         this._handleLikeCard(this._data)
-          .then((cardData) => {
-            this._setLikesInfo(cardData);
-          })
-          .catch((err) => {
-            console.log(`Ошибка добавления лайка: ${err}`);
-          })
       }
     });
 
@@ -86,6 +76,10 @@ export default class Card {
     } else {
       this._removeEl.remove();
     }
+  }
+
+  remove(card) {
+    card.remove();
   }
 
   generateCard() {

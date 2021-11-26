@@ -11,10 +11,20 @@ export default class UserInfo {
         }
     }
     setUserAvatar({ avatar }) {
-        this._avatar.style.backgroundImage = `url(${avatar})`;
+        if (avatar) {
+            this._avatar.style.backgroundImage = `url(${avatar})`;
+        }
+        else {
+            console.log("Ошибка установления аватарки")
+        }
     }
     setUserInfo({ name, description }) {
-        this._name.textContent = name;
-        this._description.textContent = description;
+        if (name || description) {
+            this._name.textContent = name;
+            this._description.textContent = description;
+        }
+        else {
+            console.log("Ошибка установки имени и статуса")
+        }
     }
 }
