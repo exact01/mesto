@@ -19,12 +19,17 @@ export default class UserInfo {
         }
     }
     setUserInfo({ name, description }) {
-        if (name || description) {
+        if (name) {
             this._name.textContent = name;
+        }
+        else {
+            console.log("Ошибка, неудалось установить имя профиля")
+        }
+        if (description) {
             this._description.textContent = description;
         }
         else {
-            console.log("Ошибка установки имени и статуса")
+            console.log("Ошибка, неудалось установить статус")
         }
     }
 }
